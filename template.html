@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5分钟罚时后提供线索</title>
+    <style>
+        body { 
+            text-align: center; 
+            padding: 50px 20px;
+            font-family: Arial;
+            background: black;
+        }
+        #countdown {
+            font-size: 60px;
+            color: white;
+            margin: 30px 0;
+        }
+        #end-message {
+            display: none;
+            color: white;
+            font-size: 40px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown">05:00</div>
+    <div id="end-message">提示：城隍庙-豫泰斋-携子饮茶-曲栏观鱼-九-曲，指向一个具体的地方：豫园湖心亭九曲桥</div>
+
+    <script>
+        let time = 300;
+        function update() {
+            let min = Math.floor(time/60).toString().padStart(2,'0');
+            let sec = (time%60).toString().padStart(2,'0');
+            document.getElementById("countdown").innerHTML = min+":"+sec;
+            
+            if(time-- <= 0) {
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("end-message").style.display = "block";
+                clearInterval(timer);
+            }
+        }
+        update(); // 立即显示
+        let timer = setInterval(update, 1000);
+    </script>
+</body>
+</html>
