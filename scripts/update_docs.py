@@ -14,14 +14,14 @@ import shutil
 if Path('docs').is_dir():
     d=Path('docs')
     [shutil.rmtree(x) if x.is_dir() else x.unlink() for x in d.iterdir()]
-# %%
-for _,row in pd.read_excel('info.xlsx').iterrows():
-    path = row['网址']
-    prompt = row['提示词']
-    html_path = Path('docs') / path
-    html_path.parent.mkdir(exist_ok=True, parents=True)
-    content = template.render(prompt=prompt)
-    
-    with open(html_path.with_suffix(".html"), 'w') as f:
-        f.write(content)
-# %%
+
+for sheet_name, df in pd.read_excel('info.xlsx', sheet_name=None).items():
+    for _,row in df.iterrows():
+        path = row['网址']
+        prompt = row['提示词']
+        html_path = Path('docs')/ sheet_name.replace('/','') / path
+        html_path.parent.mkdir(exist_ok=True, parents=True)
+        content = template.render(prompt=prompt)
+        
+        with open(html_path.with_suffix(".html"), 'w') as f:
+            f.write(content)
