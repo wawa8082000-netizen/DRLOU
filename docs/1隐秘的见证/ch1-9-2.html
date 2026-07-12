@@ -8,31 +8,68 @@
     <meta http-equiv="Expires" content="0">
     <title>3分钟罚时后提供线索</title>
     <style>
-        body { 
-            text-align: center; 
+        html, body {
+            min-height: 100%;
+        }
+        body {
+            box-sizing: border-box;
+            min-height: 100vh;
+            margin: 0;
             padding: 50px 20px;
-            font-family: Arial;
-            background: black;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            font-family: Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #3f3925 url("../background.jpg") center / cover no-repeat;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(20, 16, 8, 0.58);
+        }
+        body > * {
+            position: relative;
+            z-index: 1;
         }
         #countdown {
-            font-size: 60px;
+            min-width: 4.5em;
+            box-sizing: border-box;
+            font-size: clamp(48px, 10vw, 80px);
+            font-weight: 700;
             color: white;
             margin: 30px 0;
+            padding: 18px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 16px;
+            background: rgba(17, 13, 7, 0.8);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 4px black;
         }
         #end-message {
             display: none;
+            box-sizing: border-box;
+            width: min(900px, 100%);
             color: white;
-            font-size: 40px;
-            padding: 20px;
+            font-size: clamp(26px, 5vw, 40px);
+            font-weight: 600;
+            line-height: 1.55;
+            padding: clamp(22px, 5vw, 44px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 18px;
+            background: rgba(17, 13, 7, 0.84);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 4px black;
         }
     </style>
 </head>
 <body>
-    <div id="countdown">03:00</div>
+    <div id="countdown">00:02</div>
     <div id="end-message">你会发现四条龙两两相望，以直线连接他们的视线，交汇之处，就是答案所在。</div>
 
     <script>
-        let time = 180;
+        let time = 2;
         function update() {
             let min = Math.floor(time/60).toString().padStart(2,'0');
             let sec = (time%60).toString().padStart(2,'0');

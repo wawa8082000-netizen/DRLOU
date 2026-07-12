@@ -13,7 +13,7 @@ template = env.get_template("template.html")
 import shutil
 if Path('docs').is_dir():
     d=Path('docs')
-    [shutil.rmtree(x) if x.is_dir() else x.unlink() for x in d.iterdir() if x.suffix.lower() != '.txt']
+    [shutil.rmtree(x) if x.is_dir() else x.unlink() for x in d.iterdir() if x.suffix.lower() not in {'.txt', '.jpg'}]
 
 for sheet_name, df in pd.read_excel('info.xlsx', sheet_name=None).items():
     for _,row in df.iterrows():
